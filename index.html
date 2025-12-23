@@ -46,8 +46,64 @@
 
 <body class="bg-gray-50 text-noir font-inter font-light text-[18px] scroll-smooth">
 
-<!-- ================= HEADER ================= -->
-<header class="max-w-7xl mx-auto px-6 pt-6 mt-4 flex justify-between items-center">
+<!-- ================= HEADER MOBILE ================= -->
+<header class="md:hidden w-full px-0 pt-4">
+  <div class="grid grid-cols-12 items-center gap-2">
+
+    <!-- Logo (3 cols) -->
+    <div class="col-span-3 flex justify-center">
+      <img src="images/logo-eduvic.png" alt="EduVic" class="h-10">
+    </div>
+
+    <!-- Carousel bento (6 cols) -->
+    <div class="col-span-6 overflow-x-auto">
+      <div class="flex gap-3 snap-x snap-mandatory scrollbar-hide">
+
+        <a href="#apropos"
+          class="snap-center shrink-0 w-24 h-24 bg-white rounded-2xl shadow-offsetBlack
+                 flex items-center justify-center text-center text-sm font-medium">
+          À propos
+        </a>
+
+        <a href="#plateforme"
+          class="snap-center shrink-0 w-24 h-24 bg-white rounded-2xl shadow-offsetBlack
+                 flex items-center justify-center text-center text-sm font-medium">
+          Plateforme
+        </a>
+
+        <a href="#benefices"
+          class="snap-center shrink-0 w-24 h-24 bg-white rounded-2xl shadow-offsetBlack
+                 flex items-center justify-center text-center text-sm font-medium">
+          Bénéfices
+        </a>
+
+        <a href="#prix"
+          class="snap-center shrink-0 w-24 h-24 bg-white rounded-2xl shadow-offsetBlack
+                 flex items-center justify-center text-center text-sm font-medium">
+          Prix
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Bouton contact (3 cols) -->
+    <div class="col-span-3 flex justify-center">
+      <button
+        class="flex items-center gap-1 bg-lilas px-2 py-2 rounded-xl font-grand text-[14px] shadow-offsetLilas"
+      >
+        <span class="bg-white rounded-full p-0.5">
+          <img src="images/icone-telecharger.svg" class="w-5 h-5" />
+        </span>
+        Contact
+      </button>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- ================= HEADER DESKTOP ================= -->
+<header class="hidden md:flex max-w-7xl mx-auto px-6 pt-6 mt-4 flex justify-between items-center">
   <img src="images/logo-eduvic.png" alt="EduVic" class="h-12 md:h-14">
 
   <nav class="flex items-center font-normal gap-16">
@@ -74,7 +130,7 @@
 <!-- ========== À PROPOS ========== -->
 <section
   id="apropos"
-  class="relative pt-44 grid grid-cols-12 gap-x-16 gap-y-20 overflow-visible"
+  class="relative pt-12 md:pt-32 grid grid-cols-1 md:grid-cols-12 gap-y-20 md:gap-x-16 overflow-visible"
 >
   <!-- Fond décoratif -->
   <img
@@ -82,16 +138,17 @@
     class="pointer-events-none absolute top-[400px] right-[-300px] -translate-y-1/2 w-[1050px] opacity-80"
   />
 
-  <div class="col-span-6 text-left relative">
-    <h2 class="font-grand font-semibold text-[64px] leading-[1] mb-6">
+  <!-- Bloc 1 -->
+  <div class="md:col-span-6 text-left relative">
+    <h2 class="font-grand font-semibold text-[40px] md:text-[64px] leading-[1] mb-6">
       RENDRE L'EMC<br>PLUS ACCESSIBLE
     </h2>
 
-    <p class="text-[24px] font-normal mb-3">
+    <p class="text-[24px] md:text-[24px] font-normal mb-3">
       Découvrez notre plateforme éducative
     </p>
 
-    <ul class="space-y-1 text-[18px]">
+    <ul class="space-y-1 text-[14px] md:text-[18px]">
       <li>• Accompagner les enseignants</li>
       <li>• Faire vivre les valeurs républicaines</li>
       <li>• Encourager la participation active des jeunes</li>
@@ -99,13 +156,14 @@
 
     <img
       src="images/fleche.svg"
-      class="absolute top-[200px] -right-[60px] w-[140px]"
+      class="hidden md:block absolute top-[200px] -right-[60px] w-[140px]"
     />
   </div>
 
-  <div class="col-span-6 relative">
+  <!-- Bloc 2 -->
+  <div class="md:col-span-6 relative">
     <div
-      class="absolute -top-28 -left-2 bg-vert p-4 rounded-3xl shadow-[4px_4px_0_#148270] w-52 text-center"
+      class="hidden md:block absolute -top-28 -left-2 bg-vert p-4 rounded-3xl shadow-[4px_4px_0_#148270] w-52 text-center"
     >
       <img src="images/coeur-vert.svg" class="mx-auto mb-0.5 w-8">
       <h3 class="font-grand font-bold text-[18px] leading-[1.8]">
@@ -116,7 +174,7 @@
       </p>
     </div>
 
-    <div class="rounded-3xl overflow-hidden w-[82%] ml-auto">
+    <div class="rounded-3xl overflow-hidden w-full md:w-[82%] md:ml-auto">
       <img
         src="images/ecole-de-classe-1.png"
         class="w-full object-cover"
@@ -124,26 +182,29 @@
     </div>
   </div>
 
-  <div class="relative z-10 col-span-6 flex gap-6">
-    <div class="bg-[rgba(255,238,70,0.5)] py-16 px-6 rounded-3xl shadow-offsetJaune flex-1">
-      <h3 class="font-extrabold text-[24px] mb-2">
+  <!-- Bloc 3 -->
+  <div class="md:col-span-6 flex flex-col md:flex-row gap-6">
+    <div class="bg-[rgba(255,238,70,0.5)] py-12 md:py-16 px-6 rounded-3xl shadow-offsetJaune flex-1">
+      <h3 class="font-extrabold text-[22px] md:text-[24px] mb-2">
         Pour les <span class="font-grand font-bold">enseignants</span>
       </h3>
       <p>Gagner du temps avec des contenus prêts à l'emploi</p>
     </div>
 
-    <div class="bg-[rgba(215,184,241,0.5)] py-16 px-6 rounded-3xl shadow-offsetLilas flex-1">
-      <h3 class="font-extrabold text-[24px] mb-2">
+    <div class="bg-[rgba(215,184,241,0.5)] py-12 md:py-16 px-6 rounded-3xl shadow-offsetLilas flex-1">
+      <h3 class="font-extrabold text-[22px] md:text-[24px] mb-2">
         Pour les <span class="font-grand font-bold">élèves</span>
       </h3>
       <p>
-        La vie citoyenne, <br> simplement et en <br> s'amusant <span class="font-grand font-bold"> du CM1 <br> à la terminale</span>
+        La vie citoyenne, simplement et en s'amusant
+        <span class="font-grand font-bold"> du CM1 à la terminale</span>
       </p>
     </div>
   </div>
 
-  <div class="col-span-6 flex flex-col justify-center space-y-1 relative ml-2">
-    <h3 class="font-grand font-bold text-[24px]">
+  <!-- Bloc 4 -->
+  <div class="md:col-span-6 flex flex-col justify-center space-y-2 relative">
+    <h3 class="font-grand font-bold text-[22px] md:text-[24px]">
       Parce que…
     </h3>
 
@@ -155,10 +216,11 @@
 
     <img
       src="images/eclats.svg"
-      class="absolute top-3 right-6 w-14"
+      class="hidden md:block absolute top-3 right-6 w-14"
     />
   </div>
 </section>
+
 
 <!-- ========== PLATEFORME ========== -->
 <section id="plateforme" class="relative pt-44">
@@ -208,7 +270,7 @@
 
 <!-- ========== BÉNÉFICES ========== -->
 <section id="benefices" class="relative pt-44 grid grid-cols-2 gap-16 items-center">
-    <img src="images/bulle-texte-2.svg" class="absolute top-[130px] right-[820px] w-[550px]">
+    <img src="images/bulle-texte-2.svg" class="absolute top-[130px] right-[820px] w-[550px] ">
 
   <div>
     <h3 class="font-grand font-[600] text-[40px] leading-[1.1] mb-3">
@@ -256,13 +318,18 @@
 </main>
 
 <!-- ================= FOOTER ================= -->
-<footer class="max-w-7xl mx-auto px-6 ">
-   <div class="bg-[rgba(215,184,241,0.5)] rounded-t-3xl shadow-offsetLilas p-16  mt-44 space-y-16">
+<footer class="w-full md:max-w-7xl md:mx-auto px-4 md:px-6">
+  <div
+    class="bg-[rgba(215,184,241,0.5)] rounded-t-3xl shadow-offsetLilas
+           p-6 md:p-16 mt-24 md:mt-44 space-y-12 md:space-y-16"
+  >
+
     <!-- Top footer -->
     <div class="flex justify-between items-center">
-      <img src="images/logo-eduvic.png" alt="EduVic" class="h-[40px]">
+      <img src="images/logo-eduvic.png" alt="EduVic" class="h-[32px] md:h-[40px]">
 
-      <nav class="flex gap-6 text-[16px]">
+      <!-- NAV DESKTOP UNIQUEMENT -->
+      <nav class="hidden md:flex gap-6 text-[16px]">
         <a href="#apropos">À propos</a>
         <a href="#plateforme">La plateforme</a>
         <a href="#benefices">Bénéfices</a>
@@ -270,53 +337,85 @@
       </nav>
 
       <div class="flex gap-4">
-        <img src="images/logo-facebook.svg" class="h-[30px]">
-        <img src="images/logo-linkedin.svg" class="h-[30px]">
-        <img src="images/logo-twiter.svg" class="h-[30px]">
+        <img src="images/logo-facebook.svg" class="h-[24px] md:h-[30px]">
+        <img src="images/logo-linkedin.svg" class="h-[24px] md:h-[30px]">
+        <img src="images/logo-twiter.svg" class="h-[24px] md:h-[30px]">
       </div>
     </div>
 
     <!-- Bottom footer -->
-    <div class="grid grid-cols-12 gap-16">
-      <div class="col-span-5 space-y-6 mt-12 text-[16px]">
-        <div>
-          <h3 class="font-grand font-bold text-[24px]">Contactez-nous !</h3>
-          <p class="pt-10"><strong>Email :</strong> info@positivus.com</p>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
+
+      <!-- FORM — AU DESSUS EN MOBILE -->
+      <form
+        class="order-1 md:order-2 md:col-span-7 bg-white px-6 md:px-8 py-4 rounded-xl space-y-4"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input
+            class="border-2 border-black rounded-lg shadow-offsetBlack p-3"
+            placeholder="Prénom*"
+          >
+          <input
+            class="border-2 border-black rounded-lg shadow-offsetBlack p-3"
+            placeholder="Nom*"
+          >
         </div>
 
-        <div class="py-2">
+        <input
+          class="w-full border-2 border-black rounded-lg shadow-offsetBlack p-3"
+          placeholder="Email*"
+        >
+
+        <textarea
+          class="w-full border-2 border-black rounded-lg shadow-offsetBlack p-3"
+          rows="3"
+          placeholder="Votre message*"
+        ></textarea>
+
+        <button
+          class="mx-auto block bg-[rgba(255,238,70,0.5)] px-8 py-3 rounded-xl shadow-offsetJaune font-grand"
+        >
+          Envoyer
+        </button>
+      </form>
+
+      <!-- CONTACT — EN DESSOUS EN MOBILE -->
+      <div
+        class="order-2 md:order-1 md:col-span-5 space-y-6 text-[15px] md:text-[16px]"
+      >
+        <div>
+          <h3 class="font-grand font-bold text-[22px] md:text-[24px]">
+            Contactez-nous !
+          </h3>
+          <p class="pt-6 md:pt-10">
+            <strong>Email :</strong> info@positivus.com
+          </p>
+        </div>
+
+        <div>
           <strong>Un projet porté par :</strong>
-          <p>Melenn Brigaudeau-Frontguen, Charlène Rey, <br> Marine Tanguille, Ninon Gressus, Louen Le Gac</p>
+          <p>
+            Melenn Brigaudeau-Frontguen, Charlène Rey,<br class="hidden md:block">
+            Marine Tanguille, Ninon Gressus, Louen Le Gac
+          </p>
         </div>
 
         <hr class="border-[1px] border-black">
 
         <div class="text-sm">
-          <p class="pb-4">© 2025 EduVic. Tous droits réservés.</p>
-          <a href="#" class="underline">Politique de confidentialité</a>
+          <p class="pb-4">
+            © 2025 EduVic. Tous droits réservés.
+          </p>
+          <a href="#" class="underline">
+            Politique de confidentialité
+          </a>
         </div>
       </div>
 
-      <!-- Form -->
-      <form class="col-span-7 bg-white px-8 py-4 rounded-xl space-y-4">
-        <div class="grid grid-cols-2 gap-4">
-          <input class="border-2 border-black rounded-lg shadow-offsetBlack p-3" placeholder="Prénom*">
-          <input class="border-2 border-black rounded-lg shadow-offsetBlack p-3" placeholder="Nom*">
-        </div>
-
-        <input class="w-full border-2 border-black rounded-lg shadow-offsetBlack p-3" placeholder="Email*">
-
-        <textarea class="w-full border-2 border-black rounded-lg shadow-offsetBlack p-3" rows="3"
-          placeholder="Votre message*"></textarea>
-
-        <button class="mx-auto block bg-[rgba(255,238,70,0.5)] px-8 py-3 rounded-xl shadow-offsetJaune font-grand">
-          Envoyer
-        </button>
-      </form>
     </div>
-    </div>
+  </div>
 </footer>
+
 
 </body>
 </html>
-
