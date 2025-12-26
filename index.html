@@ -33,8 +33,10 @@
           },
           boxShadow: {
             offsetBlack: '4px 4px 0 #000',
+            offsetBlackIcon: '2px 2px 0 #000',
             offsetLilas: '4px 4px 0 #8E66AF',
             offsetLilasHover: '6px 6px 0 #8E66AF',
+            offsetLilasIcon: '3px 3px 0 #8E66AF',
             offsetJaune: '4px 4px 0 #FFEE46',
             offsetVert: '4px 4px 0 #148270',
           }
@@ -42,67 +44,47 @@
       }
     }
   </script>
+  <style>
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
 </head>
 
-<body class="bg-gray-50 text-noir font-inter font-light text-[18px] scroll-smooth">
+
+<body class="bg-gray-50 text-noir font-inter font-light text-[14px] md:text-[18px] scroll-smooth overflow-x-hidden">
 
 <!-- ================= HEADER MOBILE ================= -->
-<header class="md:hidden w-full px-0 pt-4">
-  <div class="grid grid-cols-12 items-center gap-2">
+<header class="md:hidden w-full px-4 pt-4">
+  <div class="flex justify-between items-center">
 
-    <!-- Logo (3 cols) -->
-    <div class="col-span-3 flex justify-center">
-      <img src="images/logo-eduvic.png" alt="EduVic" class="h-10">
-    </div>
+    <img src="images/logo-eduvic.png" alt="EduVic" class="h-10">
 
-    <!-- Carousel bento (6 cols) -->
-    <div class="col-span-6 overflow-x-auto">
-      <div class="flex gap-3 snap-x snap-mandatory scrollbar-hide">
-
-        <a href="#apropos"
-          class="snap-center shrink-0 w-24 h-24 bg-white rounded-2xl shadow-offsetBlack
-                 flex items-center justify-center text-center text-sm font-medium">
-          À propos
-        </a>
-
-        <a href="#plateforme"
-          class="snap-center shrink-0 w-24 h-24 bg-white rounded-2xl shadow-offsetBlack
-                 flex items-center justify-center text-center text-sm font-medium">
-          Plateforme
-        </a>
-
-        <a href="#benefices"
-          class="snap-center shrink-0 w-24 h-24 bg-white rounded-2xl shadow-offsetBlack
-                 flex items-center justify-center text-center text-sm font-medium">
-          Bénéfices
-        </a>
-
-        <a href="#prix"
-          class="snap-center shrink-0 w-24 h-24 bg-white rounded-2xl shadow-offsetBlack
-                 flex items-center justify-center text-center text-sm font-medium">
-          Prix
-        </a>
-
-      </div>
-    </div>
-
-    <!-- Bouton contact (3 cols) -->
-    <div class="col-span-3 flex justify-center">
-      <button
-        class="flex items-center gap-1 bg-lilas px-2 py-2 rounded-xl font-grand text-[14px] shadow-offsetLilas"
+    <!-- Bouton Naviguer / Fermer -->
+    <button
+      id="mobile-menu-btn"
+      class="inline-flex items-center gap-2 bg-lilas px-2 py-2 pr-4 rounded-2xl font-grand text-[15px]
+             shadow-offsetLilas transition-all duration-150 ease-out"
+    >
+      <span
+        id="mobile-menu-icon"
+        class="bg-white rounded-full p-0.5 flex items-center justify-center"
       >
-        <span class="bg-white rounded-full p-0.5">
-          <img src="images/icone-telecharger.svg" class="w-5 h-5" />
-        </span>
-        Contact
-      </button>
-    </div>
-
+        <!-- Icône burger par défaut -->
+        <span class="text-xl leading-none">☰</span>
+      </span>
+      <span id="mobile-menu-label">Naviguer</span>
+    </button>
   </div>
 </header>
 
 
-<!-- ================= HEADER DESKTOP ================= -->
+
+<!-- ================= HEADER DESCKTOP ================= -->
 <header class="hidden md:flex max-w-7xl mx-auto px-6 pt-6 mt-4 flex justify-between items-center">
   <img src="images/logo-eduvic.png" alt="EduVic" class="h-12 md:h-14">
 
@@ -112,25 +94,57 @@
     <a href="#benefices">Bénéfices</a>
     <a href="#prix">Prix</a>
 
-    <button
+    <a
+      href="#contact"
       class="flex items-center gap-2 bg-lilas px-2 py-2 pr-6 rounded-2xl font-grand text-[17px] shadow-offsetLilas
-      transition-all duration-150 ease-out hover:shadow-offsetLilasHover hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none"
+      transition-all duration-150 ease-out hover:shadow-offsetLilasHover hover:-translate-x-0.5 hover:-translate-y-0.5
+      active:translate-x-1 active:translate-y-1 active:shadow-none"
     >
-      <span class="bg-white rounded-full p-0.5">
-        <img src="images/icone-telecharger.svg" class="w-7 h-7" />
+      <span class="bg-white rounded-xl p-1">
+        <img src="images/icon-telecharger.svg" class="w-6 h-6" />
       </span>
-      Contactez-nous
-    </button>
+      <span class="pt-1">Contactez-nous</span>
+      
+    </a>
   </nav>
 </header>
 
+<!-- ================= MENU MOBILE ================= -->
+<div
+  id="mobile-menu"
+  class="md:hidden hidden w-full px-4 mt-4"
+>
+  <div
+    class="border-2 border-black rounded-3xl shadow-offsetBlack bg-white
+           flex flex-col items-center gap-6 py-10 text-[18px]"
+  >
+    <a href="#apropos">À propos</a>
+    <a href="#plateforme">La plateforme</a>
+    <a href="#benefices">Bénéfices</a>
+    <a href="#prix">Prix</a>
+
+    <!-- Bouton contact -->
+    <a
+      href="#contact"
+      class="inline-flex items-center gap-2 bg-lilas px-2 py-2 pr-6 rounded-2xl font-grand text-[17px]
+             shadow-offsetLilas"
+    >
+      <span class="bg-white rounded-full p-0.5">
+        <img src="images/icone-telecharger.svg" class="w-6 h-6">
+      </span>
+      Contactez-nous
+    </a>
+  </div>
+</div>
+
+
 <!-- ================= MAIN ================= -->
-<main class="max-w-7xl mx-auto px-6">
+<main class="max-w-7xl mx-auto px-4 md:px-6">
 
 <!-- ========== À PROPOS ========== -->
 <section
   id="apropos"
-  class="relative pt-12 md:pt-32 grid grid-cols-1 md:grid-cols-12 gap-y-20 md:gap-x-16 overflow-visible"
+  class="relative pt-12 md:pt-44 grid grid-cols-12 gap-y-8 md:gap-y-20 md:gap-x-16 overflow-visible"
 >
   <!-- Fond décoratif -->
   <img
@@ -138,17 +152,19 @@
     class="pointer-events-none absolute top-[400px] right-[-300px] -translate-y-1/2 w-[1050px] opacity-80"
   />
 
-  <!-- Bloc 1 -->
-  <div class="md:col-span-6 text-left relative">
-    <h2 class="font-grand font-semibold text-[40px] md:text-[64px] leading-[1] mb-6">
+  <div class="col-span-12 md:col-span-6 text-left relative">
+    <h2 class="font-grand font-semibold text-[40px] md:text-[64px] leading-[1] mb-3 md:mb-6">
       RENDRE L'EMC<br>PLUS ACCESSIBLE
     </h2>
 
-    <p class="text-[24px] md:text-[24px] font-normal mb-3">
-      Découvrez notre plateforme éducative
+    <p class="text-[20px] md:text-[24px] font-normal mb-3">
+      Découvrez notre
+      <span class="block md:hidden"></span>
+      <span class="hidden md:inline"></span>
+       plateforme éducative
     </p>
 
-    <ul class="space-y-1 text-[14px] md:text-[18px]">
+    <ul class="space-y-1">
       <li>• Accompagner les enseignants</li>
       <li>• Faire vivre les valeurs républicaines</li>
       <li>• Encourager la participation active des jeunes</li>
@@ -160,51 +176,94 @@
     />
   </div>
 
-  <!-- Bloc 2 -->
-  <div class="md:col-span-6 relative">
+  <div class="col-span-12 md:col-span-6 relative mt-12">
     <div
-      class="hidden md:block absolute -top-28 -left-2 bg-vert p-4 rounded-3xl shadow-[4px_4px_0_#148270] w-52 text-center"
+      class="absolute -top-16 md:-top-28 -left-2 bg-vert p-4 rounded-3xl shadow-[4px_4px_0_#148270] w-40 md:w-52 text-center"
     >
-      <img src="images/coeur-vert.svg" class="mx-auto mb-0.5 w-8">
-      <h3 class="font-grand font-bold text-[18px] leading-[1.8]">
+      <img src="images/coeur-vert.svg" class="mx-auto mb-0.5 w-4 md:w-8">
+      <h3 class="font-grand font-bold leading-[1.4] md:leading-[1.8]">
         1 mission
       </h3>
-      <p class="text-[14px] leading-[1.2]">
+      <p class="text-[10px] md:text-[14px] leading-[1.2]">
         Accompagner la formation des citoyens de demain
       </p>
     </div>
 
-    <div class="rounded-3xl overflow-hidden w-full md:w-[82%] md:ml-auto">
+    <div class="rounded-3xl overflow-hidden w-[82%] ml-auto">
       <img
         src="images/ecole-de-classe-1.png"
         class="w-full object-cover"
       >
     </div>
   </div>
+  <div class="relative z-10 col-span-12 md:col-span-6">
+    <!-- Carousel -->
+    <div
+      id="cards-carousel"
+      class="flex md:grid md:grid-cols-2 gap-6
+            overflow-x-auto md:overflow-visible
+            snap-x snap-mandatory
+            scroll-smooth
+            px-4 md:px-0
+            py-4 md:py-0
+            no-scrollbar"
+    >
+      <!-- Slide 1 -->
+      <div class="snap-center shrink-0 w-[85%] md:w-auto">
+        <div class="bg-[rgba(255,238,70,0.5)] 
+                    py-6 md:py-16 px-6 
+                    rounded-3xl 
+                    shadow-offsetJaune 
+                    h-full">
+          <h3 class="font-extrabold text-[20px] md:text-[24px] mb-2">
+            Pour les <span class="font-grand font-bold">enseignants</span>
+          </h3>
+          <p>Gagner du temps avec des contenus prêts à l'emploi</p>
+        </div>
+      </div>
 
-  <!-- Bloc 3 -->
-  <div class="md:col-span-6 flex flex-col md:flex-row gap-6">
-    <div class="bg-[rgba(255,238,70,0.5)] py-12 md:py-16 px-6 rounded-3xl shadow-offsetJaune flex-1">
-      <h3 class="font-extrabold text-[22px] md:text-[24px] mb-2">
-        Pour les <span class="font-grand font-bold">enseignants</span>
-      </h3>
-      <p>Gagner du temps avec des contenus prêts à l'emploi</p>
+      <!-- Slide 2 -->
+      <div class="snap-center shrink-0 w-[85%] md:w-auto">
+        <div class="bg-[rgba(215,184,241,0.5)] 
+                    py-6 md:py-16 px-6 
+                    rounded-3xl 
+                    shadow-offsetLilas 
+                    h-full">
+          <h3 class="font-extrabold text-[20px] md:text-[24px] mb-2">
+            Pour les <span class="font-grand font-bold">élèves</span>
+          </h3>
+          <p>
+            La vie citoyenne,
+            <span class="hidden md:block"></span><span class="inline md:hidden"> </span>
+            simplement et en
+            <span class="hidden md:block"></span><span class="inline md:hidden"> </span>
+            s'amusant
+            <span class="font-grand font-bold">
+              du CM1
+              <span class="hidden md:block"></span><span class="inline md:hidden"> </span>
+              à la terminale
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
 
-    <div class="bg-[rgba(215,184,241,0.5)] py-12 md:py-16 px-6 rounded-3xl shadow-offsetLilas flex-1">
-      <h3 class="font-extrabold text-[22px] md:text-[24px] mb-2">
-        Pour les <span class="font-grand font-bold">élèves</span>
-      </h3>
-      <p>
-        La vie citoyenne, simplement et en s'amusant
-        <span class="font-grand font-bold"> du CM1 à la terminale</span>
-      </p>
+    <!-- Dots -->
+    <div class="flex justify-center gap-2 mt-4 md:hidden">
+      <button
+        class="carousel-dot w-[8px] h-[8px] rounded-full bg-black"
+        data-index="0"
+      ></button>
+      <button
+        class="carousel-dot w-[7.5px] h-[8px] rounded-full bg-black/30"
+        data-index="1"
+      ></button>
     </div>
   </div>
 
-  <!-- Bloc 4 -->
-  <div class="md:col-span-6 flex flex-col justify-center space-y-2 relative">
-    <h3 class="font-grand font-bold text-[22px] md:text-[24px]">
+
+  <div class="col-span-12 md:col-span-6 flex flex-col justify-center space-y-1 relative ml-2 mt-4 md:mt-0">
+    <h3 class="font-grand font-bold text-[24px]">
       Parce que…
     </h3>
 
@@ -216,71 +275,107 @@
 
     <img
       src="images/eclats.svg"
-      class="hidden md:block absolute top-3 right-6 w-14"
+      class="absolute -top-10 md:top-3 right-6 w-10 md:w-14"
     />
   </div>
 </section>
 
-
 <!-- ========== PLATEFORME ========== -->
-<section id="plateforme" class="relative pt-44">
+<section id="plateforme" class="relative pt-20 md:pt-44">
 
    <img
     src="images/fondu-points-violet.svg"
     class="pointer-events-none absolute top-[250px] right-[850px] -translate-y-1/2 w-[1050px] opacity-80 z-0"
   />
 
-  <h2 class="font-grand font-[600] text-[40px] leading-[1] mb-24 text-center">
+  <h2 class="font-grand font-[600] text-[40px] leading-[1] mb-12 md:mb-24 text-center">
     UNE PLATEFORME COMPLÈTE POUR <br> APPRENDRE ET ENSEIGNER
   </h2>
-  <img src="images/bulle-texte-1.svg" class="absolute top-[130px] right-[250px] w-[700px]">
+  <img src="images/bulle-texte-1.svg" class="hidden md:block absolute top-[130px] right-[250px] w-[700px]">
 
-  <div class="relative z-10 grid grid-cols-12 gap-x-5 text-left">
-    
-    <div class="col-span-3 border-2 border-black rounded-3xl py-10 px-4 bg-white shadow-offsetBlack">
-      <h3 class="font-extrabold text-[24px] leading-[1.2] mb-2">
-        Des modules interactifs ludiques
-      </h3>
-      <p>Serious games, vidéos, infographies, BD</p>
+  <div class="relative z-10">
+
+  <!-- Carousel / Grid -->
+  <div
+    id="plateforme-carousel"
+    class="flex md:grid md:grid-cols-12 gap-6
+           overflow-x-auto md:overflow-visible
+           snap-x snap-mandatory
+           scroll-smooth
+           px-4 md:px-0
+           no-scrollbar"
+  >
+
+    <!-- Carte 1 -->
+    <div class="snap-start shrink-0 w-[85%] md:w-auto md:col-span-3">
+      <div class="border-2 border-black rounded-3xl py-10 px-4 bg-white shadow-offsetBlack h-full">
+        <h3 class="font-extrabold text-[24px] leading-[1.2] mb-2">
+          Des modules interactifs ludiques
+        </h3>
+        <p>Serious games, vidéos, infographies, BD</p>
+      </div>
     </div>
 
-    <div class="col-span-3 border-2 border-black rounded-3xl py-10 px-4 bg-white shadow-offsetBlack">
-      <h3 class="font-extrabold text-[24px] leading-[1.2] mb-2">
-        Des contenus adaptés par niveau
-      </h3>
-      <p>De l'élémentaire à la fin du lycée</p>
+    <!-- Carte 2 -->
+    <div class="snap-start shrink-0 w-[85%] md:w-auto md:col-span-3">
+      <div class="border-2 border-black rounded-3xl py-10 px-4 bg-white shadow-offsetBlack h-full">
+        <h3 class="font-extrabold text-[24px] leading-[1.2] mb-2">
+          Des contenus adaptés par niveau
+        </h3>
+        <p>De l'élémentaire à la fin du lycée</p>
+      </div>
     </div>
 
-    <div class="col-span-3 border-2 border-black rounded-3xl py-10 px-4 bg-white shadow-offsetBlack">
-      <h3 class="font-extrabold text-[24px] leading-[1.2] mb-2">
-        Des ressources pour les enseignants
-      </h3>
-      <p>Fiches d'activités, ressources pédagogiques…
-      </p>
+    <!-- Carte 3 -->
+    <div class="snap-start shrink-0 w-[85%] md:w-auto md:col-span-3">
+      <div class="border-2 border-black rounded-3xl py-10 px-4 bg-white shadow-offsetBlack h-full">
+        <h3 class="font-extrabold text-[24px] leading-[1.2] mb-2">
+          Des ressources pour les enseignants
+        </h3>
+        <p>Fiches d'activités, ressources pédagogiques…</p>
+      </div>
     </div>
 
-    <div class="col-span-3 border-2 border-black rounded-3xl py-10 px-4 bg-white shadow-offsetBlack">
-      <h3 class="font-extrabold text-[24px] leading-[1.2] mb-2">
-        Un suivi de progression élèves
-      </h3>
-      <p>Suivi simple de l'apprentissage</p>
+    <!-- Carte 4 -->
+    <div class="snap-start shrink-0 w-[85%] md:w-auto md:col-span-3">
+      <div class="border-2 border-black rounded-3xl py-10 px-4 bg-white shadow-offsetBlack h-full">
+        <h3 class="font-extrabold text-[24px] leading-[1.2] mb-2">
+          Un suivi de progression élèves
+        </h3>
+        <p>Suivi simple de l'apprentissage</p>
+      </div>
     </div>
+
   </div>
+
+  <!-- Dots mobile -->
+  <div class="flex justify-center gap-2 mt-4 md:hidden">
+    <button class="plateforme-dot w-2 h-2 rounded-full bg-black" data-index="0"></button>
+    <button class="plateforme-dot w-2 h-2 rounded-full bg-black/30" data-index="1"></button>
+    <button class="plateforme-dot w-2 h-2 rounded-full bg-black/30" data-index="2"></button>
+    <button class="plateforme-dot w-2 h-2 rounded-full bg-black/30" data-index="3"></button>
+  </div>
+
+</div>
+
 </section>
 
 <!-- ========== BÉNÉFICES ========== -->
-<section id="benefices" class="relative pt-44 grid grid-cols-2 gap-16 items-center">
+<section id="benefices" class="relative pt-20 md:pt-44 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 items-center">
     <img src="images/bulle-texte-2.svg" class="absolute top-[130px] right-[820px] w-[550px] ">
 
   <div>
     <h3 class="font-grand font-[600] text-[40px] leading-[1.1] mb-3">
-      LES BÉNÉFICES <br>POUR VOTRE ÉQUIPE <br>PÉDAGOGIQUE
+      LES BÉNÉFICES 
+      <span class="hidden md:block"></span><span class="inline md:hidden"> </span>
+      POUR VOTRE ÉQUIPE 
+      <span class="hidden md:block"></span><span class="inline md:hidden"> </span>PÉDAGOGIQUE
     </h3>
     <p class="text-[24px] leading-[1.3] ">Former les citoyens <br>de demain</p>
   </div>
   
 
-  <div class="bg-[rgba(133,213,200,0.5)] p-14 rounded-3xl shadow-offsetVert">
+  <div class="bg-[rgba(133,213,200,0.5)] p-10 md:p-14 rounded-3xl shadow-offsetVert">
     <ul class="list-disc list-inside space-y-1">
       <li>Un alignement avec le programme et les instructions officielles de l'Education Nationale</li>
       <li>Des ressources clés en main, adaptées et facile d'utilisation</li>
@@ -290,26 +385,32 @@
 </section>
 
 <!-- ========== PRIX ========== -->
-<section id="prix" class="relative pt-44">
+<section id="prix" class="relative pt-20 md:pt-44">
     <img
     src="images/fondu-points-jaune.svg"
     class="pointer-events-none absolute top-[250px] -right-[500px] -translate-y-1/2 w-[1050px] opacity-80 z-0"
   />
-  <div class="relative border-2 border-black rounded-3xl shadow-offsetBlack bg-white px-10 py-6 flex justify-between items-center z-10">
+  <div class="relative border-2 border-black rounded-3xl shadow-offsetBlack bg-white px-10 py-6 md:flex justify-between items-center z-10">
     <div>
-      <h3 class="font-grand font-[600] text-[38px] mb-4">ENVIE DE TESTER ?</h3>
-      <p class="mb-6 leading-[1.3] text-[24px]">Découvrez nos tarifs en nous contactant <br> via le formulaire ci-dessous</p>
-
-      <button class="flex items-center gap-3 bg-lilas px-3 py-2 pr-6 rounded-2xl shadow-offsetLilas font-grand
-      transition-all duration-150 ease-out hover:shadow-offsetLilasHover hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none">
-        <span class="bg-white rounded-full p-0.5">
-          <img src="images/icone-telecharger.svg" class="w-7 h-7">
+      <h3 class="font-grand font-[600] text-[38px] leading-[1] md:leading-[1.3] mb-2 md:mb-4">ENVIE DE TESTER ?</h3>
+      <div class="md:hidden rounded-xl overflow-hidden w-auto mb-2 ">
+      <img src="images/ecole-de-classe-2.jpg">
+    </div>
+      <p class="mb-6 leading-[1.3] text-[20px] md:text-[24px]">Découvrez nos tarifs en nous contactant <br> via le formulaire ci-dessous</p>
+      <a
+        href="#contact"
+        class="inline-flex items-center gap-2 bg-lilas px-2 py-2 pr-6 rounded-2xl font-grand shadow-offsetLilas
+        transition-all duration-150 ease-out hover:shadow-offsetLilasHover hover:-translate-x-0.5 hover:-translate-y-0.5
+        active:translate-x-1 active:translate-y-1 active:shadow-none"
+      >
+        <span class="bg-white rounded-xl p-1">
+          <img src="images/icon-telecharger.svg" class="w-6 h-6" />
         </span>
-        Demandez nos tarifs
-      </button>
+        <span class="pt-1">Demandez nos tarifs</span>
+      </a>
     </div>
 
-    <div class="rounded-xl overflow-hidden w-[550px] h-[250px]">
+    <div class="hidden md:block rounded-xl overflow-hidden w-[550px] h-[250px]">
       <img src="images/ecole-de-classe-2.jpg">
     </div>
   </div>
@@ -318,17 +419,13 @@
 </main>
 
 <!-- ================= FOOTER ================= -->
-<footer class="w-full md:max-w-7xl md:mx-auto px-4 md:px-6">
-  <div
-    class="bg-[rgba(215,184,241,0.5)] rounded-t-3xl shadow-offsetLilas
-           p-6 md:p-16 mt-24 md:mt-44 space-y-12 md:space-y-16"
-  >
-
+<footer class="w-full md:max-w-7xl md:mx-auto px-4 md:px-6 " id="contact">
+   <div class="bg-[rgba(215,184,241,0.5)] rounded-t-3xl shadow-offsetLilas
+              p-6 md:p-16 mt-24 md:mt-44 space-y-12 md:space-y-16">
     <!-- Top footer -->
     <div class="flex justify-between items-center">
-      <img src="images/logo-eduvic.png" alt="EduVic" class="h-[32px] md:h-[40px]">
+      <img src="images/logo-eduvic.png" alt="EduVic" class="h-[36px] md:h-[40px]">
 
-      <!-- NAV DESKTOP UNIQUEMENT -->
       <nav class="hidden md:flex gap-6 text-[16px]">
         <a href="#apropos">À propos</a>
         <a href="#plateforme">La plateforme</a>
@@ -337,9 +434,35 @@
       </nav>
 
       <div class="flex gap-4">
-        <img src="images/logo-facebook.svg" class="h-[24px] md:h-[30px]">
-        <img src="images/logo-linkedin.svg" class="h-[24px] md:h-[30px]">
-        <img src="images/logo-twiter.svg" class="h-[24px] md:h-[30px]">
+        <a
+    href="#"
+    class="w-10 h-10 rounded-full border-[1px] border-black bg-white
+     flex shadow-offsetBlackIcon items-center justify-center
+     transition-all duration-150 ease-out
+     active:translate-x-1 active:translate-y-1 active:shadow-none"
+  >
+    <img src="images/icon-facebook.svg" class="h-6">
+  </a>
+
+  <a
+    href="#"
+    class="w-10 h-10 rounded-full border-[1px] border-black bg-white
+     flex shadow-offsetBlackIcon items-center justify-center
+     transition-all duration-150 ease-out
+     active:translate-x-1 active:translate-y-1 active:shadow-none"
+  >
+    <img src="images/icon-instagram.svg" class="h-6">
+  </a>
+
+  <a
+    href="#"
+    class="w-10 h-10 rounded-full border-[1px] border-black bg-white
+     flex shadow-offsetBlackIcon  items-center justify-center
+     transition-all duration-150 ease-out
+     active:translate-x-1 active:translate-y-1 active:shadow-none"
+  >
+    <img src="images/icon-linkedIn.svg" class="h-6 translate-x-[3px] -translate-y-[2px]">
+  </a>
       </div>
     </div>
 
@@ -415,6 +538,62 @@
     </div>
   </div>
 </footer>
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const label = document.getElementById('mobile-menu-label');
+  const icon = document.getElementById('mobile-menu-icon');
+
+  let isOpen = false;
+
+  btn.addEventListener('click', () => {
+    isOpen = !isOpen;
+
+    menu.classList.toggle('hidden');
+
+    if (isOpen) {
+      label.textContent = 'Fermer';
+      icon.innerHTML = '<span class="text-xl leading-none">✕</span>';
+      btn.classList.add('-translate-x-0.5', '-translate-y-0.5', 'shadow-offsetLilasHover');
+    } else {
+      label.textContent = 'Naviguer';
+      icon.innerHTML = '<span class="text-xl leading-none">☰</span>';
+      btn.classList.remove('-translate-x-0.5', '-translate-y-0.5', 'shadow-offsetLilasHover');
+    }
+  });
+</script>
+<script>
+  function initCarousel(carouselId, dotClass) {
+    const carousel = document.getElementById(carouselId);
+    const dots = document.querySelectorAll(`.${dotClass}`);
+
+    if (!carousel || dots.length === 0) return;
+
+    function updateDots() {
+      const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('bg-black', i === index);
+        dot.classList.toggle('bg-black/30', i !== index);
+      });
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const index = Number(dot.dataset.index);
+        carousel.scrollTo({
+          left: carousel.offsetWidth * index,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    carousel.addEventListener('scroll', updateDots);
+  }
+
+  // Init carousels
+  initCarousel('cards-carousel', 'carousel-dot');
+  initCarousel('plateforme-carousel', 'plateforme-dot');
+</script>
 
 
 </body>
