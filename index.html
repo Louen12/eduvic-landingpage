@@ -52,11 +52,20 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+  .burger-line {
+    transition:
+      transform 300ms ease,
+      top 300ms ease,
+      opacity 200ms ease;
+  }
+  html, body {
+    overflow-x: hidden;
+  }
   </style>
 </head>
 
 
-<body class="bg-gray-50 text-noir font-inter font-light text-[14px] md:text-[18px] scroll-smooth overflow-x-hidden">
+<body class="bg-gray-50 text-noir font-inter font-light text-[14px] md:text-[18px] scroll-smooth">
 
 <!-- ================= HEADER MOBILE ================= -->
 <header class="md:hidden w-full px-4 pt-4">
@@ -66,19 +75,42 @@
 
     <!-- Bouton Naviguer / Fermer -->
     <button
-      id="mobile-menu-btn"
-      class="inline-flex items-center gap-2 bg-lilas px-2 py-2 pr-4 rounded-2xl font-grand text-[15px]
-             shadow-offsetLilas transition-all duration-150 ease-out"
+  id="mobile-menu-btn"
+  class="group inline-flex items-center gap-3 bg-lilas px-1.5 py-1.5 rounded-2xl font-grand text-[15px]
+         shadow-offsetLilas transition
+         active:translate-x-1 active:translate-y-1 active:shadow-none"
+>
+  <!-- Icône -->
+  <span
+  id="mobile-menu-icon"
+  class="bg-white rounded-full flex items-center justify-center"
+>
+  <span class="relative w-7 h-7">
+    <img
+      src="images/trait.svg"
+      class="burger-line absolute left-0 right-0 mx-auto top-[7.5px]"
     >
-      <span
-        id="mobile-menu-icon"
-        class="bg-white rounded-full p-0.5 flex items-center justify-center"
-      >
-        <!-- Icône burger par défaut -->
-        <span class="text-xl leading-none">☰</span>
-      </span>
-      <span id="mobile-menu-label">Naviguer</span>
-    </button>
+    <img
+      src="images/trait.svg"
+      class="burger-line absolute left-0 right-0 mx-auto top-[12.5px]  "
+    >
+    <img
+      src="images/trait.svg"
+      class="burger-line absolute left-0 right-0 mx-auto top-[17.5px]"
+    >
+  </span>
+</span>
+
+  <!-- Texte (largeur fixe) -->
+  <span class="relative w-[80px] text-left overflow-hidden">
+    <span
+      id="menu-label"
+      class="block transition-opacity duration-200"
+    >
+      Naviguer
+    </span>
+  </span>
+</button>
   </div>
 </header>
 
@@ -149,7 +181,7 @@
   <!-- Fond décoratif -->
   <img
     src="images/fondu-points-vert.svg"
-    class="pointer-events-none absolute top-[400px] right-[-300px] -translate-y-1/2 w-[1050px] opacity-80"
+    class="pointer-events-none absolute top-[350px] md:top-[400px] right-[-450px] md:right-[-300px] -translate-y-1/2 w-[700px] md:w-[1050px] max-w-none opacity-80"
   />
 
   <div class="col-span-12 md:col-span-6 text-left relative">
@@ -196,7 +228,7 @@
       >
     </div>
   </div>
-  <div class="relative z-10 col-span-12 md:col-span-6">
+  <div class="relative z-10 col-span-12 md:col-span-6 ">
     <!-- Carousel -->
     <div
       id="cards-carousel"
@@ -285,7 +317,7 @@
 
    <img
     src="images/fondu-points-violet.svg"
-    class="pointer-events-none absolute top-[250px] right-[850px] -translate-y-1/2 w-[1050px] opacity-80 z-0"
+    class="pointer-events-none absolute md:top-[250px] right-[50px] md:right-[850px] md:-translate-y-1/2 w-[700px] md:w-[1050px] max-w-none opacity-80 z-0"
   />
 
   <h2 class="font-grand font-[600] text-[40px] leading-[1] mb-12 md:mb-24 text-center">
@@ -303,6 +335,7 @@
            snap-x snap-mandatory
            scroll-smooth
            px-4 md:px-0
+           py-4 md:py-0
            no-scrollbar"
   >
 
@@ -375,7 +408,7 @@
   </div>
   
 
-  <div class="bg-[rgba(133,213,200,0.5)] p-10 md:p-14 rounded-3xl shadow-offsetVert">
+  <div class="bg-[rgba(133,213,200,0.5)] p-10 md:p-14 rounded-3xl shadow-offsetVert z-100">
     <ul class="list-disc list-inside space-y-1">
       <li>Un alignement avec le programme et les instructions officielles de l'Education Nationale</li>
       <li>Des ressources clés en main, adaptées et facile d'utilisation</li>
@@ -388,7 +421,7 @@
 <section id="prix" class="relative pt-20 md:pt-44">
     <img
     src="images/fondu-points-jaune.svg"
-    class="pointer-events-none absolute top-[250px] -right-[500px] -translate-y-1/2 w-[1050px] opacity-80 z-0"
+    class="pointer-events-none absolute top-[200px] md:top-[250px] md:-right-[500px] -translate-y-1/2 w-[700px] md:w-[1050px] max-w-none opacity-80 z-0"
   />
   <div class="relative border-2 border-black rounded-3xl shadow-offsetBlack bg-white px-10 py-6 md:flex justify-between items-center z-10">
     <div>
@@ -540,55 +573,81 @@
 </footer>
 <script>
   const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  const label = document.getElementById('mobile-menu-label');
-  const icon = document.getElementById('mobile-menu-icon');
+const menu = document.getElementById('mobile-menu');
+const label = document.getElementById('menu-label');
+const lines = document.querySelectorAll('.burger-line');
 
-  let isOpen = false;
+let isOpen = false;
 
-  btn.addEventListener('click', () => {
-    isOpen = !isOpen;
+btn.addEventListener('click', () => {
+  isOpen = !isOpen;
+  menu.classList.toggle('hidden');
 
-    menu.classList.toggle('hidden');
+  // Texte
+  label.classList.add('opacity-0');
+  setTimeout(() => {
+    label.textContent = isOpen ? 'Fermer' : 'Naviguer';
+    label.classList.remove('opacity-0');
+  }, 0);
 
-    if (isOpen) {
-      label.textContent = 'Fermer';
-      icon.innerHTML = '<span class="text-xl leading-none">✕</span>';
-      btn.classList.add('-translate-x-0.5', '-translate-y-0.5', 'shadow-offsetLilasHover');
-    } else {
-      label.textContent = 'Naviguer';
-      icon.innerHTML = '<span class="text-xl leading-none">☰</span>';
-      btn.classList.remove('-translate-x-0.5', '-translate-y-0.5', 'shadow-offsetLilasHover');
-    }
-  });
+  // Ligne du haut
+  lines[0].classList.toggle('top-1/2');
+  lines[0].classList.toggle('-translate-y-1/2');
+  lines[0].classList.toggle('rotate-45');
+
+  // Ligne du milieu
+  lines[1].classList.toggle('opacity-0');
+
+  // Ligne du bas
+  lines[2].classList.toggle('top-1/2');
+  lines[2].classList.toggle('-translate-y-1/2');
+  lines[2].classList.toggle('-rotate-45');
+});
 </script>
 <script>
   function initCarousel(carouselId, dotClass) {
-    const carousel = document.getElementById(carouselId);
-    const dots = document.querySelectorAll(`.${dotClass}`);
+  const carousel = document.getElementById(carouselId);
+  const dots = document.querySelectorAll(`.${dotClass}`);
 
-    if (!carousel || dots.length === 0) return;
+  if (!carousel || dots.length === 0) return;
 
-    function updateDots() {
-      const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('bg-black', i === index);
-        dot.classList.toggle('bg-black/30', i !== index);
-      });
+  function updateDots() {
+    const slides = carousel.children;
+    let activeIndex = 0;
+
+    for (let i = 0; i < slides.length; i++) {
+      const slideLeft = slides[i].offsetLeft;
+      const slideWidth = slides[i].offsetWidth;
+
+      if (
+        carousel.scrollLeft >= slideLeft - slideWidth / 2 &&
+        carousel.scrollLeft < slideLeft + slideWidth / 2
+      ) {
+        activeIndex = i;
+        break;
+      }
     }
 
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        const index = Number(dot.dataset.index);
-        carousel.scrollTo({
-          left: carousel.offsetWidth * index,
-          behavior: 'smooth'
-        });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('bg-black', i === activeIndex);
+      dot.classList.toggle('bg-black/30', i !== activeIndex);
+    });
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const index = Number(dot.dataset.index);
+      const slide = carousel.children[index];
+
+      carousel.scrollTo({
+        left: slide.offsetLeft,
+        behavior: 'smooth'
       });
     });
+  });
 
-    carousel.addEventListener('scroll', updateDots);
-  }
+  carousel.addEventListener('scroll', updateDots);
+}
 
   // Init carousels
   initCarousel('cards-carousel', 'carousel-dot');
